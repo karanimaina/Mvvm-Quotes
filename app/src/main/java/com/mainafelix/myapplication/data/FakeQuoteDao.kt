@@ -1,5 +1,6 @@
 package com.mainafelix.myapplication.data
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class FakeQuoteDao {
@@ -18,4 +19,6 @@ class FakeQuoteDao {
        quoteList.add(quote)
         quotes.value = quoteList
     }
+    //todo cast the quotes to Live data
+    fun getQuotes() = quotes as LiveData<List<Quote>>
 }
