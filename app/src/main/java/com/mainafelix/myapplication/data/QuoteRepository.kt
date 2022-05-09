@@ -5,12 +5,13 @@ package com.mainafelix.myapplication.data;
      fun addQuote(quote: Quote){
          quoteDao.addQuote(quote)
      }
+     //todo get the quotes
      fun getQoute () = quoteDao.getQuotes()
     companion object{
         // makes the right ofthis property visible to other threads
         @Volatile
         private var instance:QuoteRepository?= null
-        fun getInstance(quoteDao: FakeQuoteDao){
+        fun getQuotes(quoteDao: FakeQuoteDao){
             // use the elvis operrator to return instance if not nuull or else synchronise the
             instance ?: synchronized(this){
                 //2 threads cannot be executing at the same time
