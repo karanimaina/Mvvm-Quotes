@@ -11,7 +11,7 @@ package com.mainafelix.myapplication.data;
         // makes the right ofthis property visible to other threads
         @Volatile
         private var instance:QuoteRepository?= null
-        fun getQuotes(quoteDao: FakeQuoteDao){
+        fun getInstance(quoteDao: FakeQuoteDao){
             // use the elvis operrator to return instance if not nuull or else synchronise the
             instance ?: synchronized(this){
                 //2 threads cannot be executing at the same time
