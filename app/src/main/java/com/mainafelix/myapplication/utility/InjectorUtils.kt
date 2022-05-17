@@ -1,15 +1,17 @@
 package com.mainafelix.myapplication.utility
 
-import com.mainafelix.myapplication.UI.quotes.QotesViewModel
-import com.mainafelix.myapplication.UI.quotes.QuotesFactory
+import QuoteRepository
+import com.mainafelix.myapplication.UI.quotes.QuotesViewModelFactory
 import com.mainafelix.myapplication.data.FakeDatabase
-import com.mainafelix.myapplication.data.QuoteRepository
 
+// Finally a singleton which doesn't need anything passed to the constructor
 object InjectorUtils {
-    // is a singleton doesn't require a constructior
-    fun provideQuotesViewModelFactory():QuotesFactory{
-        val  quoteRepository1 = QuoteRepository.getInstance(FakeDatabase.getInstance().quoteDao)
-        return QuotesFactory(quoteRepository1)
 
+    // This will be called from com.mainafelix.myapplication.QuotesActivity
+    fun provideQuotesViewModelFactory(): QuotesViewModelFactory {
+        // ViewModelFactory needs a repository, which in turn needs a DAO from a database
+        // The whole dependency tree is constructed right here, in one place
+        val quoteRepository = QuoteRepository.getInstance(FakeDatabase.getInstance().quoteDao)
+        return QuotesViewModelFactory(quoteRepository)
     }
 }

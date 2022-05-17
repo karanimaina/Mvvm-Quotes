@@ -1,26 +1,23 @@
-package com.mainafelix.myapplication.data;
- class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao ) {
-    // they are the source of data for the view model
+import com.mainafelix.myapplication.data.FakeQuoteDao
+import com.mainafelix.myapplication.data.Quote
 
-     fun addQuote(quote: Quote){
-         quoteDao.addQuote(quote)
-     }
-     //todo get the quotes
-     fun getQoute () = quoteDao.getQuotes()
-    companion object{
-        // makes the right ofthis property visible to other threads
-        @Volatile
-        private var instance:QuoteRepository?= null
-        fun getInstance(quoteDao: FakeQuoteDao){
-            // use the elvis operrator to return instance if not nuull or else synchronise the
-            instance ?: synchronized(this){
-                //2 threads cannot be executing at the same time
-                //todo return fakedatabase instance if value is null
-                instance ?:QuoteRepository(quoteDao).also {
-                    //todo set the instance  to be equal to the database instance"
+class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao) {
 
-                }
+    // This may seem redundant.
+    // Imagine a code which also updates and checks the backend.
+    fun addQuote(quote: Quote) {
+        quoteDao.addQuote(quote)
+    }
+
+    fun getQuotes() = quoteDao.getQuotes()
+
+    companion object {
+        // Singleton instantiation you already know and love
+        @Volatile private var instance: QuoteRepository? = null
+
+        fun getInstance(quoteDao: FakeQuoteDao) =
+            instance ?: synchronized(this) {
+                instance ?: QuoteRepository(quoteDao).also { instance = it }
             }
-        }
-
-    }}
+    }
+}
