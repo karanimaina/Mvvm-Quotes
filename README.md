@@ -1,6 +1,7 @@
 # Mvvm-Quotes
 An application that displays quiz questions
 
-#Technologies used
+# Technologies used
 <li> Kotlin</li>
+<li> Mvvm Architecture</li
 
