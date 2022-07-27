@@ -5,7 +5,7 @@ are you lookin for an avenue to save quotes, worry not this application offers t
 <li> Mvvm Architecture</li>
 <li> Room Database</li>
 
-#Sample
+# Sample
 fork the app , from the github repo and lauch an android Ide , run the app on tyour mobile deice or o the AVD
 
 # Bdd 
